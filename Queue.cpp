@@ -12,25 +12,23 @@
 // InFront() => Return the element at the front without removing it.
 // size() => number of element present in the queue.
 // isEmpty()
-
-// Implementing Queue using an array
+// Implement Queue using an array
 #include <iostream>
 using namespace std;
 class Queue
 {
 private:
     int *arr;
-    int size;
     int head;
     int rear;
+    int size;
 
 public:
     Queue(int size)
     {
-        arr = new int[size];
         this->size = size;
-        head = -1;
-        rear = -1;
+        arr = new int[size];
+        head = rear = -1;
     }
     bool isEmpty();
     bool enqueue(int data);
@@ -38,7 +36,21 @@ public:
     int front();
     void display();
 };
-
+bool Queue ::isEmpty()
+{
+    if ((head == -1) && (rear == -1))
+    {
+        return true;
+    }
+    else if (rear == size - 1)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
 bool Queue ::enqueue(int data)
 {
     if (isEmpty())
@@ -63,36 +75,17 @@ bool Queue ::enqueue(int data)
         return false;
     }
 }
-bool Queue ::isEmpty()
-{
-    if ((head == -1) && (rear == -1))
-    {
-        return true;
-    }
-    else if (rear == size - 1)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
 int Queue ::dequeue()
 {
     if ((head == -1) && (rear == -1))
     {
+        cout << "Queue is Empty" << endl;
         return -1;
     }
     else
     {
         int ans = arr[head];
         head++;
-        if (head == rear)
-        {
-            head = -1;
-            rear = -1;
-        }
         return ans;
     }
 }
@@ -100,6 +93,7 @@ int Queue ::front()
 {
     if ((head == -1) && (rear == -1))
     {
+        cout << "Queue is Empty" << endl;
         return -1;
     }
     else
@@ -107,10 +101,9 @@ int Queue ::front()
         return arr[head];
     }
 }
-
 void Queue ::display()
 {
-    for (int i = head; i < rear; i++)
+    for (int i = head; i <= rear; i++)
     {
         cout << arr[i] << "\t";
     }
@@ -118,19 +111,20 @@ void Queue ::display()
 }
 int main(void)
 {
-    Queue q(10);
-    q.enqueue(5);
+    Queue q(5);
     q.enqueue(10);
     q.enqueue(15);
     q.enqueue(20);
     q.enqueue(25);
     q.enqueue(30);
-    cout << "Elements of the queue are => " << endl;
+    cout << "Elements of the Queue are => " << endl;
     q.display();
     cout << q.front() << endl;
     cout << q.dequeue() << endl;
-    cout << q.front() << endl;
-    cout << "Elements of the queue are => " << endl;
+    cout << "Elements of the Queue after removing element => " << endl;
     q.display();
+    cout << q.front() << endl;
+    q.enqueue(35);
+    q.enqueue(40);
     return 0;
 }
