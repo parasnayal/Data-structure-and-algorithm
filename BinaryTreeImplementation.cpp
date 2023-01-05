@@ -24,6 +24,7 @@ int main(void)
 Node *create_binary_tree(Node *root)
 {
     int data;
+    
     cout << "Enter the data(-1 for no node)" << endl;
     cin >> data;
     if (data == -1)
